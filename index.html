@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>唐丰机电设备有限公司</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 登录页面 -->
+      <div id="loginPage" class="page active">
+        <div class="content-container">
+          <h1 class="company-title">唐丰机电设备有限公司</h1>
+          <div class="login-container">
+            <div class="login-type-selector">
+              <button
+                type="button"
+                class="type-btn active"
+                data-type="employee"
+              >
+                普通员工登录
+              </button>
+              <button type="button" class="type-btn" data-type="admin">
+                管理员登录
+              </button>
+            </div>
+            <form id="loginForm" class="login-form">
+              <div class="input-group">
+                <input type="text" id="username" placeholder="账号" />
+                <button type="button" class="show-hint">请输入员工账号</button>
+              </div>
+              <div class="input-group">
+                <input type="password" id="password" placeholder="密码" />
+                <button type="button" class="show-hint">请输入员工密码</button>
+              </div>
+              <button type="submit" class="login-btn">登录</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- 主界面 -->
+      <div id="mainPage" class="page">
+        <div class="content-container">
+          <header>
+            <h1>唐丰机电设备有限公司</h1>
+            <button id="logoutBtn">退出登录</button>
+          </header>
+
+          <main>
+            <!-- 商品列表 -->
+            <div id="itemList" class="hidden">
+              <h2>发货状态查询</h2>
+              <div class="search-box">
+                <input
+                  type="text"
+                  id="searchInput"
+                  placeholder="输入商品名称搜索..."
+                />
+                <div id="searchSuggestions" class="suggestions hidden"></div>
+              </div>
+              <div class="sort-buttons">
+                <button id="showAll">显示全部</button>
+                <button id="showPending">查看未发货</button>
+                <button id="showShipped">查看已发货</button>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>商品名称</th>
+                    <th>状态</th>
+                    <th>库存数量</th>
+                    <th>发货时间</th>
+                    <th>发货数量</th>
+                    <th>剩余数量</th>
+                    <th>描述</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- 动态生成的内容 -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 管理员面板 -->
+            <div id="adminPanel" class="hidden">
+              <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="itemList">
+                  查看商品
+                </button>
+                <button class="tab-btn" data-tab="addItem">添加商品</button>
+              </div>
+              <div class="admin-content">
+                <form id="addItemForm" class="hidden">
+                  <h3>添加新商品</h3>
+                  <input
+                    type="text"
+                    id="newItemName"
+                    placeholder="商品名称"
+                    required
+                  />
+                  <input
+                    type="number"
+                    id="newItemStock"
+                    placeholder="初始库存数量"
+                    required
+                    min="0"
+                  />
+                  <select id="newItemStatus">
+                    <option value="待发货">待发货</option>
+                    <option value="已发货">已发货</option>
+                  </select>
+                  <input type="date" id="newShipDate" />
+                  <input
+                    type="number"
+                    id="newShipQuantity"
+                    placeholder="发货数量"
+                    min="0"
+                  />
+                  <input type="text" id="newDescription" placeholder="描述" />
+                  <button type="submit">添加</button>
+                </form>
+                <div class="item-table">
+                  <h3>商品列表</h3>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>商品名称</th>
+                        <th>状态</th>
+                        <th>库存数量</th>
+                        <th>发货时间</th>
+                        <th>发货数量</th>
+                        <th>剩余数量</th>
+                        <th>描述</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody id="adminItemList">
+                      <!-- 动态生成的内容 -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+    <script src="config.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
